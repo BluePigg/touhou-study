@@ -67,7 +67,7 @@
 }
 
 .pfImage:active {
-  transform: scale(0.8);
+  transform: scale(0.75);
   border: 0px solid;
 }
 
@@ -89,14 +89,5 @@
   }
   to {
     transform: rotate(360deg);
-  }
-}
-
-@keyframes imageSize {
-  from {
-    transform: scale(0.5);
-  }
-  to {
-    transform: scale(0.8);
   }
 }
