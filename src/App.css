@@ -1,34 +1,102 @@
 .App {
   text-align: center;
+  display: flex;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  align-items: left;
+  flex-direction: column;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@import url("https://fonts.googleapis.com/css2?family=Bungee&display=swap");
+
+.NavBar {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.SearchBar {
+  display: flex;
+  border-radius: 10px;
+  width: 50%;
+  height: fit-content;
+  background-color: #ffffff;
+}
+
+.Random {
+  display: flex;
+  width: 5%;
+  height: 50%;
+  left: 1%;
+}
+
+.fumo {
+  display: flex;
+  width: 20%;
+  margin-top: 1rem;
+  margin-right: 5%;
+  margin-left: 1rem;
+  border-radius: 150px;
+  animation: rotate 5s linear infinite;
+  user-select: none;
+}
+
+.Main {
+  margin-top: 0%;
+  height: 90vh;
+  width: 100%;
+  align-items: flex-start;
+  flex-direction: row;
+  display: flex;
+}
+
+.pfImage {
+  background-color: white;
+  display: flex;
+  margin-top: 1%;
+  margin-left: 1%;
+  transform-origin: top left;
+  transform: scale(0.5);
+  object-fit: cover;
+  border-radius: 10%;
+  border: 5px solid #000000;
+  transition: 0.5s ease-out;
+  user-select: none;
+}
+
+.pfImage:active {
+  transform: scale(0.8);
+  border: 0px solid;
+}
+
+@media (min-width: 600px) {
+  .fumo {
+    width: 5rem;
+  }
+  .SearchBar {
+    width: 20rem;
+  }
+  .pfImage:hover {
+    transform: scale(0.8);
+    border: 0px solid;
   }
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-@keyframes App-logo-spin {
+@keyframes rotate {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes imageSize {
+  from {
+    transform: scale(0.5);
+  }
+  to {
+    transform: scale(0.8);
   }
 }
