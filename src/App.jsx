@@ -10,6 +10,9 @@ function App() {
           src={`${process.env.PUBLIC_URL}/images/fumo.png`}
           className="fumo"
           alt="fumo"
+          onContextMenu={() => {
+            return false;
+          }}
         ></img>
         <TextField
           variant="filled"
@@ -25,6 +28,9 @@ function App() {
           src="https://i.namu.wiki/i/wgzMvFitt_Ccx3R_5TSQgvN94SCkeLH326fQcjGTVxfgnul34UVJ6Sp5Skhz_8HftWrSf2OZjNQp1NjiF2wNjYT2Le9Atm38_Hj0MQFijIC2uffrZkjR_MncTxRDDUwAydIafQvSJDXqwFH-Suz5Hg.webp"
           className={`pfImage`}
           alt=""
+          onContextMenu={() => {
+            return false;
+          }}
         ></img>
       </div>
     </div>
