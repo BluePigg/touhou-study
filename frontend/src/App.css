@@ -67,7 +67,7 @@
 }
 
 .pfImage:active {
-  transform: scale(0.75);
+  transform: scale(0.7);
   border: 0px solid;
 }
 
