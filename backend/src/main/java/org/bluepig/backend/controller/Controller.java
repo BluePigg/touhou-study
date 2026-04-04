@@ -1,12 +1,11 @@
-package org.bluepig.backend;
+package org.bluepig.backend.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller
-public class test {
-    @GetMapping("/hello")
+@org.springframework.stereotype.Controller
+public class Controller {
+    @GetMapping(value = {"","/hello"})
     @ResponseBody
     public String hello() {
         return "no hello";

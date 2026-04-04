@@ -8,6 +8,14 @@ function App() {
     event.stopPropagation();
     return false;
   };
+
+  const [search, changeSearch] = React.useState("");
+  function keyDown(key) {
+    if (key.key === "Enter") {
+      console.log(`ㅇㅋ: ${search}`);
+    }
+  }
+
   return (
     <div className="App">
       <div className="NavBar">
@@ -20,6 +28,8 @@ function App() {
           variant="filled"
           className="SearchBar"
           label="동캐 이름 입력 (ex: 하쿠레이레이무)"
+          onChange={changeSearch}
+          onKeyDown={keyDown}
         ></TextField>
         <Button variant="contained" className="Random" color="primary">
           랜덤 동캐
@@ -27,7 +37,7 @@ function App() {
       </div>
       <div className="Main">
         <img
-          src="https://i.namu.wiki/i/wgzMvFitt_Ccx3R_5TSQgvN94SCkeLH326fQcjGTVxfgnul34UVJ6Sp5Skhz_8HftWrSf2OZjNQp1NjiF2wNjYT2Le9Atm38_Hj0MQFijIC2uffrZkjR_MncTxRDDUwAydIafQvSJDXqwFH-Suz5Hg.webp"
+          src="https://i.namu.wiki/i/Piyc1W-kB_bCRXFIO9hC5-4Cqtmha2Y-UkC8wP-uIwA29NyzdNyMAvshIL3ymvSaFk5r1jBdGcUyle6T7S-z0rNzhhEU4eUvf9m3fPpgmBVTNKhwo1fv2MOGOxBmbjwiG6T-XOgT0k6NS2QHDVy5JQ.webp"
           className={`pfImage`}
           alt=""
         ></img>
