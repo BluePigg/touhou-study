@@ -10,9 +10,22 @@ function App() {
   };
 
   const [search, changeSearch] = React.useState("");
+  const [v, cValue] = React.useState("");
   function keyDown(key) {
     if (key.key === "Enter") {
-      console.log(`ㅇㅋ: ${search}`);
+      fetch("http://localhost:8088/crawling", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          in: search,
+        }),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          cValue(res.out);
+        });
     }
   }
 
@@ -28,7 +41,9 @@ function App() {
           variant="filled"
           className="SearchBar"
           label="동캐 이름 입력 (ex: 하쿠레이레이무)"
-          onChange={changeSearch}
+          onChange={(e) => {
+            changeSearch(e.target.value);
+          }}
           onKeyDown={keyDown}
         ></TextField>
         <Button variant="contained" className="Random" color="primary">
@@ -41,6 +56,7 @@ function App() {
           className={`pfImage`}
           alt=""
         ></img>
+        <a href={v}>{v !== "" ? "생성완료!" : ""}</a>
       </div>
     </div>
   );
