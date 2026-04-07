@@ -11,23 +11,6 @@ function App() {
 
   const [search, changeSearch] = React.useState("");
   const [v, cValue] = React.useState("");
-  function keyDown(key) {
-    if (key.key === "Enter") {
-      fetch("http://localhost:8088/crawling", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          in: search,
-        }),
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          cValue(res.out);
-        });
-    }
-  }
 
   return (
     <div className="App">
@@ -44,9 +27,41 @@ function App() {
           onChange={(e) => {
             changeSearch(e.target.value);
           }}
-          onKeyDown={keyDown}
+          onKeyDown={(key) => {
+            if (key.key === "Enter") {
+              fetch("http://localhost:8088/specific", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  in: search,
+                }),
+              })
+                .then((res) => res.json())
+                .then((res) => {
+                  cValue(res.out);
+                });
+            }
+          }}
         ></TextField>
-        <Button variant="contained" className="Random" color="primary">
+        <Button
+          variant="contained"
+          className="Random"
+          color="primary"
+          onClick={() => {
+            fetch("http://localhost:8088/random", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+              .then((res) => res.json())
+              .then((res) => {
+                cValue(res.out);
+              });
+          }}
+        >
           랜덤 동캐
         </Button>
       </div>
@@ -56,7 +71,7 @@ function App() {
           className={`pfImage`}
           alt=""
         ></img>
-        <a href={v}>{v !== "" ? "생성완료!" : ""}</a>
+        <a href={v}>{search}</a>
       </div>
     </div>
   );

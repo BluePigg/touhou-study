@@ -6,6 +6,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +37,11 @@ public class Soup {
                 continue;
             }
             if (innerHTML.equals("2.5.")) {/**System.out.println("Ends here!");**/ break;}
-            CharacterWLinks.put(innerHTML,chr.attr("abs:href"));
+            if (innerHTML.startsWith("2")) {
+                continue;
+            }
+            String name = URLDecoder.decode(chr.attr("abs:href").replace("https://namu.wiki/w/", ""), StandardCharsets.UTF_8).replaceAll(" ","").replaceAll("\\(동방프로젝트\\)", "");
+            CharacterWLinks.put(name,chr.attr("abs:href"));
             i++;
         }
 
