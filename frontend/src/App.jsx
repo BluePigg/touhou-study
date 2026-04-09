@@ -9,9 +9,25 @@ function App() {
     return false;
   };
 
+  function fetch_(endpoint, input_, func) {
+    fetch(`http://localhost:8088/${endpoint}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        in: input_,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        func(res.out);
+      });
+  }
+
   const [search, changeSearch] = React.useState("");
-  const [v, cValue] = React.useState("");
-  const [i, cImg] = React.useState("");
+  const [link_, changeLink] = React.useState("");
+  const [characterImage, changeCImg] = React.useState("");
 
   return (
     <div className="App">
@@ -30,32 +46,12 @@ function App() {
           }}
           onKeyDown={(key) => {
             if (key.key === "Enter") {
-              fetch("http://localhost:8088/specific", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  in: search,
-                }),
-              })
-                .then((res) => res.json())
-                .then((res) => {
-                  cValue(res.out);
-                  fetch("http://localhost:8088/img", {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                      in: res.out,
-                    }),
-                  })
-                    .then((r) => r.json())
-                    .then((r) => {
-                      cImg(r.out);
-                    });
+              fetch_("specific", search, (r) => {
+                changeLink(r);
+                fetch_("img", r, (r1) => {
+                  changeCImg(r1);
                 });
+              });
             }
           }}
         ></TextField>
@@ -64,37 +60,20 @@ function App() {
           className="Random"
           color="primary"
           onClick={() => {
-            fetch("http://localhost:8088/random", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-            })
-              .then((res) => res.json())
-              .then((res) => {
-                cValue(res.out);
-                fetch("http://localhost:8088/img", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    in: res.out,
-                  }),
-                })
-                  .then((r) => r.json())
-                  .then((r) => {
-                    cImg(r.out);
-                  });
+            fetch_("random", "", (r) => {
+              changeLink(r);
+              fetch_("img", r, (r1) => {
+                changeCImg(r1);
               });
+            });
           }}
         >
           랜덤 동캐
         </Button>
       </div>
       <div className="Main">
-        <img src={i} className={`pfImage`} alt=""></img>
-        <a href={v}>{search}</a>
+        <img src={characterImage} className={`pfImage`} alt=""></img>
+        <a href={link_}>{search}</a>
       </div>
     </div>
   );

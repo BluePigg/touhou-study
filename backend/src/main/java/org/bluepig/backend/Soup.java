@@ -86,8 +86,7 @@ public class Soup {
             Element e = (Element) _e;
             String s = e.children().toString();
             int b = BpUtil.keywordScoring(s,"이름","종족","직업","능력","거주지","활동 장소","활동","첫 등장");
-            System.out.println(b);
-            if (b>=6) {
+            if (b>=4) {
                 table = e;
             }
         }
@@ -100,14 +99,16 @@ public class Soup {
 
     //캐릭터 이미지 주소 얻기
     public static String getCharacterImg(Element table) throws Exception {
+        Elements imgs = table.selectXpath("//div[@class='"+table.attr("class")+"']//img[@data-src]");
         Element img = null;
-        for (Element e : table.children()) {
-            if (!e.attr("data-src").equals(null)) {
-                img = e;
-            }
+        if (imgs.size()==1) {
+            img = imgs.get(0);
+        } else {
+            System.out.println(imgs);
         }
+
         if (!img.equals(null)) {
-            return img.attr("src");
+            return img.attr("data-src");
         } else {
             throw new Exception("이미지를 못 찾음");
         }

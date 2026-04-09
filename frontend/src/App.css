@@ -58,8 +58,11 @@
   margin-top: 1%;
   margin-left: 1%;
   transform-origin: top left;
+  min-width: 500px;
+  min-height: 500px;
+  aspect-ratio: 1/1;
   transform: scale(0.5);
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 10%;
   border: 5px solid #000000;
   transition: 0.5s ease-out;

@@ -42,6 +42,7 @@ public class CrawlController {
         Map<String, Object> result = map;
         String input = result.get("in").toString();
         String link = Soup.getCharacterImg(Soup.getCharacterTable(input));
+
         if (!link.equals("")) {
             result.put("out",link);
         } else {
